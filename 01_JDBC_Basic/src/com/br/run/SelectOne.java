@@ -48,7 +48,7 @@ public class SelectOne {
 		// JDBC 과정중에 필요한 객체 미리 세팅 
 		Connection conn = null;
 		Statement stmt = null;
-		ResultSet rset = null;
+		ResultSet rset = null; // select 문에서 사용
 		
 		// 실행할 sql문 (유의사항: 절대 세미콜론이 있어서는 안됨 ***)
 		String sql = "SELECT TNO, TNAME, TDATE FROM TEST WHERE TNO = 1";
