@@ -7,6 +7,7 @@ public class Test {
 	private int testNo;			// TEST 테이블의 TNO 컬럼(NUMBER)값 담기위한 필드
 	private String testName;	// TEST 테이블의 TNAME 컬럼(VARCHAR2)값 담기위한 필드 
 	private Date testDate;		// TEST 테이블의 TDATE 컬럼(DATE)값 담기위한 필드
+								// 소문자 2개 이상으로 적어주는게 좋음
 	
 	public Test() {}
 
