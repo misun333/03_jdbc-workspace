@@ -231,24 +231,32 @@ public class MemberDao {
 	 * @return 텅빈리스트 | 조회 결과가 담긴 리스트
 	 */
 	
-	public List<Member> selectMemberByUserName(String userName) { // 이름으로 키워드 검색
-		// select문(여러행) => ResultSet객체 => 각 행 Member객체 => 리스트에 쌓기
+public List<Member> selectMemberByUserName(String userName) {
 		
-		List<Member> list = new ArrayList<>();  // 텅빈리스트
+		List<Member> list = new ArrayList<>();  
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM MEMBER WHERE USER_NAME LIKE = ?";
+		// SELECT * FROM MEMBER WHERE USER_NAME LIKE '%XX%'
+		//String sql = "SELECT * FROM MEMBER WHERE USER_NAME LIKE '%?%'"; // 1)
+		//String sql = "SELECT * FROM MEMBER WHERE USER_NAME LIKE '%' || ? || '%'"; // 2)
+		String sql = "SELECT * FROM MEMBER WHERE USER_NAME LIKE ?"; // 3)
+		
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userName);
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jdbc", "JDBC");
+			
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql문
+			
+			//pstmt.setString(1, userName);   			// 1) '홍길동'   => LIKE '%'홍길동'%'   		=> x
+			//pstmt.setString(1, userName);   			// 2) '홍길동'   => LIKE '%' || '홍길동' || '%' => o
+			pstmt.setString(1, "%" + userName + "%");	// 3) '%홍길동%' => LIKE '%홍길동%'				=> o
+			
 			rset = pstmt.executeQuery();
-
+			
 			while(rset.next()) {
 				list.add(new Member(rset.getInt("user_no")
 								  , rset.getString("user_id")
@@ -276,7 +284,7 @@ public class MemberDao {
 			}
 		}
 		
-		return list;
+		return list; // 텅빈리스트 | 조회결과가담겨있는리스트
 		
 	}
 	
@@ -387,7 +395,16 @@ public class MemberDao {
 		
 	}	
 
-	
+	/*
+	 * 1. 5번 메뉴 회원 정보 변경  
+	 * 2. 3번 메뉴 아이디로 검색 
+	 * 3. 4번 메뉴 이름으로 키워드 검색 
+	 * 
+	 * dao 측 메소드 수정해보기! 
+	 * 기존에 작성되어있는 코드 다 지우고
+	 * PreparedStatement 방식으로 수정해보기
+	 * 테스트도 해볼것!
+	 */
 	
 	
 
