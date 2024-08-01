@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- XML 파일에서의 주석 -->	
+	<entry key="selectMemberList">
+		SELECT USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+		     , GENDER
+		     , AGE
+		     , EMAIL
+		     , PHONE
+		     , HOBBY
+		     , REGIST_DATE
+		  FROM MEMBER 
+		 ORDER
+		 	BY USER_NO ASC
+	</entry>
+	
+
+	<!--세미콜론 찍으면 안됨! -->
+	
+	<entry key="insertMember">
+		INSERT 
+		  INTO MEMBER
+		  	  (
+		  	  	USER_NO
+		  	  , USER_ID
+		  	  , USER_PWD
+		  	  , USER_NAME
+		  	  , GENDER
+		  	  , AGE
+		  	  , EMAIL
+		  	  , PHONE
+		  	  , HOBBY
+		  	  )
+		  VALUES
+		  	  ( 
+		  	  	SEQ_UNO.NEXTVAL
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  , ?
+		  	  )
+	</entry>
+	
+	
+	
+	<entry key="selectMemberByUserId">
+		SELECT USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+		     , GENDER
+		     , AGE
+		     , EMAIL
+		     , PHONE
+		     , HOBBY
+		     , REGIST_DATE
+		  FROM MEMBER 
+		 WHERE USER_ID = ?
+	</entry>
+	
+	
+	
+	<entry key="selectMemberByUserName">
+		SELECT USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+		     , GENDER
+		     , AGE
+		     , EMAIL
+		     , PHONE
+		     , HOBBY
+		     , REGIST_DATE
+		  FROM MEMBER 
+		 WHERE USER_NAME LIKE '%' || ? || '%'
+	</entry>
+	
+	
+	
+	<entry key="updateMember">
+		UPDATE MEMBER 
+			SET USER_PWD=?
+	          , EMAIL=?
+			  , PHONE=?
+		      , HOBBY=?
+		  WHERE USER_ID=?
+	</entry>
+	
+	
+	
+	<entry key="deleteMember">
+		DELETE 
+	      FROM MEMBER 
+	     WHERE USER_ID = ?
+	</entry>
+	
+	
+	
+	<entry key="loginMember">
+		SELECT USER_NAME
+		  FROM MEMBER 
+		 WHERE USER_ID = ? 
+		   AND USER_PWD = ?
+	</entry>
+	
+	
+	<entry key="selectOldMemberName">
+		SELECT USER_NAME
+		  FROM MEMBER
+		 WHERE AGE = (SELECT MAX(AGE)
+		 				FROM MEMBER)			
+	</entry>
+	
+	
+	<entry key="selectMemberCount">
+		SELECT COUNT(*) AS COUNT
+		  FROM MEMBER
+	</entry>
+		
+	
+	
+	
+</properties>
