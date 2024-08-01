@@ -89,7 +89,7 @@ public class SelectOne {
 				*/
 				
 				// * 매개변수생성자로 생성과 동시에 값 대입
-				t = new Test(rset.getInt("TNO"), rset.getString("TNAME"), rset.getDate(3));
+				t = new Test(rset.getInt("TNO"), rset.getString("TNAME"), rset.getDate(3)); // 3은 컬럼순번. 되도록 컬럼명 적어주는게 좋음
 				
 			}
 			
