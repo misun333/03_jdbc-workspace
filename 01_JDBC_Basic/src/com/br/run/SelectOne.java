@@ -43,17 +43,17 @@ public class SelectOne {
 		//			=> Test Vo객체에 담기 
 		
 		// 최종적으로 조회결과를 담아낼 자바 객체 세팅
-		Test t = null;
+		Test t = null; // null로 초기화
 		
 		// JDBC 과정중에 필요한 객체 미리 세팅 
 		Connection conn = null;
 		Statement stmt = null;
-		ResultSet rset = null; // select 문에서 사용
+		ResultSet rset = null; // select 문에서 사용. DML문 이라면 안써도 됨
 		
-		// 실행할 sql문 (유의사항: 절대 세미콜론이 있어서는 안됨 ***)
+		// 실행할 sql문 (유의사항: sql 뒤에 절대 세미콜론이 있어서는 안됨 ***)
 		String sql = "SELECT TNO, TNAME, TDATE FROM TEST WHERE TNO = 1";
 		
-		try {
+		try { // 예외가 발생될 수 있는 구문들이라 try 블럭 안에 기술
 			
 			// 1) jdbc driver 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver"); 
