@@ -1,0 +1,11 @@
+CREATE TABLE PRODUCT(
+    PRODUCT_ID       VARCHAR2(15)     PRIMARY KEY
+  , P_NAME           VARCHAR2(20)     NOT NULL
+  , PRICE            NUMBER           NOT NULL
+  , DESCROPTION      VARCHAR2(20)   
+  , STOCK            NUMBER           NOT NULL
+);
+
+CREATE SEQUENCE SEQ_PR
+        NOCACHE;
+        
